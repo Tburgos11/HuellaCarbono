@@ -1,6 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'resultados_screen.dart';
+import 'donaciones_screen.dart';
+
+const String backendUrl = 'https://bookish-space-happiness-wr7x9w7px55h7px-46465.app.github.dev/encuesta';
 
 void main() => runApp(const HuellaCarbonoApp());
 
@@ -13,6 +18,10 @@ class HuellaCarbonoApp extends StatelessWidget {
       title: 'Huella de Carbono Estudiantes',
       theme: ThemeData(primarySwatch: Colors.green),
       home: const FormularioHuella(),
+      routes: {
+        '/resultados': (context) => const ResultadosScreen(resultado: ''), // Se sobrescribe al navegar
+        '/donaciones': (context) => const DonacionesScreen(),
+      },
     );
   }
 }
@@ -87,7 +96,7 @@ class _FormularioHuellaState extends State<FormularioHuella> {
   Future<void> enviarFormulario() async {
     setState(() => cargando = true);
 
-  final url = Uri.parse('http://localhost:46465/encuesta');
+  final url = Uri.parse(backendUrl);
     final body = {
       "nombre": nombre,
       "carrera": carrera,
@@ -131,22 +140,11 @@ class _FormularioHuellaState extends State<FormularioHuella> {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         resultado = data["emisiones_estimadas_kgCO2"].toString();
-
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Resultados de Huella de Carbono'),
-            content: Text(
-                '¡Encuesta completada!\n\nHuella de carbono estimada: $resultado kg CO₂'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  setState(() => _currentStep = 0); // Reiniciar formulario
-                },
-                child: const Text('Cerrar'),
-              ),
-            ],
+        // Navegar a la pantalla de resultados
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ResultadosScreen(resultado: resultado),
           ),
         );
       } else {
@@ -503,9 +501,50 @@ class _FormularioHuellaState extends State<FormularioHuella> {
             type: StepperType.vertical,
             currentStep: _currentStep,
             steps: getSteps(),
-            onStepContinue: _continuar,
-            onStepCancel: () {
-              if (_currentStep > 0) setState(() => _currentStep--);
+            onStepContinue: () {
+              if (_currentStep == 6) {
+                // Último paso: mostrar botón 'Enviar resultados'
+                enviarFormulario();
+              } else {
+                _continuar();
+              }
+            },
+            controlsBuilder: (context, details) {
+              if (_currentStep == 6) {
+                return Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: cargando
+                          ? null
+                          : () {
+                              final formActual = _formKeys[6].currentState;
+                              if (formActual != null && formActual.validate()) {
+                                enviarFormulario();
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Complete todos los campos obligatorios')),
+                                );
+                              }
+                            },
+                      child: const Text('Enviar resultados'),
+                    ),
+                  ],
+                );
+              } else {
+                return Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: cargando ? null : details.onStepContinue,
+                      child: const Text('Continuar'),
+                    ),
+                    if (_currentStep > 0)
+                      TextButton(
+                        onPressed: cargando ? null : details.onStepCancel,
+                        child: const Text('Atrás'),
+                      ),
+                  ],
+                );
+              }
             },
           ),
           if (cargando)

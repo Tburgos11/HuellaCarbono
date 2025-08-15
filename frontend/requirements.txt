@@ -1,0 +1,22 @@
+# Requisitos para el frontend Flutter
+# Instala Flutter y sus dependencias usando el SDK oficial
+# Este archivo es solo informativo, Flutter no usa requirements.txt para dependencias
+
+# Requisitos principales:
+# - Flutter SDK (https://docs.flutter.dev/get-started/install)
+# - Dart SDK (incluido en Flutter)
+# - Paquetes declarados en pubspec.yaml
+
+# Para instalar dependencias:
+# Ejecuta en la terminal:
+# flutter pub get
+
+# Dependencias usadas en este proyecto:
+# - http
+# - flutter/material
+# - Otros declarados en pubspec.yaml
+
+# Para instalar Flutter en VS Code:
+# 1. Instala la extensión "Flutter" desde el Marketplace
+# 2. Instala la extensión "Dart" desde el Marketplace
+# 3. Ejecuta 'flutter pub get' en la carpeta frontend
