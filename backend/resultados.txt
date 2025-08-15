@@ -1,0 +1,30 @@
+
+--- Nueva respuesta ---
+nombre: Prueba
+carrera: Sistemas
+semestre: 2
+edad: 20
+transporte: Bus
+distancia_diaria_km: 10.0
+dias_asistencia: 5
+comparte_transporte: True
+horas_laboratorio: 3.0
+tipo_laboratorio: Cómputo
+usa_equipos_alto_consumo: False
+equipos_usados: PC
+horas_pc_dia: 4.0
+dispositivo_principal: Laptop
+consumo_electricidad_extra: False
+tipo_consumo: Ninguno
+tipo_proyectos: Software
+materiales_usados: Ninguno
+residuos_por_proyecto_kg: 1.0
+proyectos_por_semestre: 2
+clasifica_residuos: True
+porcentaje_reciclaje: Nada
+residuos_peligrosos: False
+laboratorio_gestiona_seguro: False
+usa_botella: True
+evita_imprimir: True
+comidas_fuera_semana: 2
+voluntariado_ambiental: False
