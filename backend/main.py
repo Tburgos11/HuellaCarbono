@@ -48,6 +48,12 @@ class SurveyResponse(BaseModel):
     comidas_fuera_semana: int
     voluntariado_ambiental: bool
 
+
+@app.get("/")
+def read_root():
+    return {"mensaje": "API de Huella de Carbono Estudiantes", "status": "activo", "endpoints": ["/encuesta", "/docs"]}
+
+
 @app.post("/encuesta")
 def send_survey(respuesta: SurveyResponse):
     # Guardar los datos recibidos en resultados.txt

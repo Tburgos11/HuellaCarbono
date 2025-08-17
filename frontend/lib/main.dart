@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'resultados_screen.dart';
 import 'donaciones_screen.dart';
 
-const String backendUrl = 'https://bookish-space-happiness-wr7x9w7px55h7px-46465.app.github.dev/encuesta';
+const String backendUrl = 'http://localhost:8000/encuesta';
 
 void main() => runApp(const HuellaCarbonoApp());
 
