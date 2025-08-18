@@ -58,3 +58,33 @@ usa_botella: True
 evita_imprimir: True
 comidas_fuera_semana: 0
 voluntariado_ambiental: True
+
+--- Nueva respuesta ---
+nombre: Cecilia
+carrera: Computacion
+semestre: 5
+edad: 23
+transporte: Bus
+distancia_diaria_km: 6.0
+dias_asistencia: 4
+comparte_transporte: True
+horas_laboratorio: 8.0
+tipo_laboratorio: Cómputo
+usa_equipos_alto_consumo: False
+equipos_usados: 
+horas_pc_dia: 6.0
+dispositivo_principal: Laptop
+consumo_electricidad_extra: False
+tipo_consumo: 
+tipo_proyectos: Computacion
+materiales_usados: 2
+residuos_por_proyecto_kg: 2.0
+proyectos_por_semestre: 2
+clasifica_residuos: True
+porcentaje_reciclaje: 25 – 50%
+residuos_peligrosos: True
+laboratorio_gestiona_seguro: False
+usa_botella: True
+evita_imprimir: True
+comidas_fuera_semana: 2
+voluntariado_ambiental: False

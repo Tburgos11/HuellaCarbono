@@ -48,10 +48,27 @@ class SurveyResponse(BaseModel):
     comidas_fuera_semana: int
     voluntariado_ambiental: bool
 
+class DonationRequest(BaseModel):
+    email: str = Field(..., description="Correo electrónico del donante")
+    foundation_name: str = Field(..., description="Nombre de la fundación")
 
 @app.get("/")
 def read_root():
-    return {"mensaje": "API de Huella de Carbono Estudiantes", "status": "activo", "endpoints": ["/encuesta", "/docs"]}
+    return {"mensaje": "API de Huella de Carbono Estudiantes", "status": "activo", "endpoints": ["/encuesta", "/donacion", "/docs"]}
+
+@app.post("/donacion")
+def save_donation(donacion: DonationRequest):
+    # Guardar la donación en donaciones.txt
+    with open("donaciones.txt", "a", encoding="utf-8") as f:
+        from datetime import datetime
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        f.write(f"{timestamp} - Correo: {donacion.email} - Fundación: {donacion.foundation_name}\n")
+    
+    return {
+        "mensaje": "Donación registrada exitosamente",
+        "correo": donacion.email,
+        "fundacion": donacion.foundation_name
+    }
 
 
 @app.post("/encuesta")
