@@ -78,17 +78,18 @@ def send_survey(respuesta: SurveyResponse):
         f.write("\n--- Nueva respuesta ---\n")
         for k, v in respuesta.dict().items():
             f.write(f"{k}: {v}\n")
-    # Factores de emisión (ejemplo aproximado)
-    FACTOR_BUS = 0.05  # kg CO2 por km
+
+    # Factores de emisión  aproximado
+    FACTOR_BUS = 0.05  
     FACTOR_AUTO = 0.21
     FACTOR_MOTO = 0.15
     FACTOR_PC_HORA = 0.06
     FACTOR_LAB_HORA = 0.08
-    FACTOR_RESIDUOS = 1.2  # kg CO2 por kg
-    FACTOR_COMIDA = 2.5  # kg CO2 por comida
-    FACTOR_IMPRESION = 0.5  # kg CO2 por impresión semanal
-    FACTOR_BOTELLA = -1.0  # kg CO2 ahorrado por usar botella
-    FACTOR_VOLUNTARIADO = -2.0  # kg CO2 ahorrado por voluntariado
+    FACTOR_RESIDUOS = 1.2  
+    FACTOR_COMIDA = 2.5  
+    FACTOR_IMPRESION = 0.5  
+    FACTOR_BOTELLA = -1.0  
+    FACTOR_VOLUNTARIADO = -2.0  
     FACTOR_RECICLAJE = {
         "Nada": 0,
         "Menos del 25%": -1,
@@ -96,8 +97,8 @@ def send_survey(respuesta: SurveyResponse):
         "50 – 75%": -3,
         "Más del 75%": -4
     }
-    FACTOR_CONSUMO_EXTRA = 0.1  # kg CO2 por hora extra
-    FACTOR_LAB_SEGURO = -1.0  # kg CO2 ahorrado si laboratorio gestiona seguro
+    FACTOR_CONSUMO_EXTRA = 0.1  
+    FACTOR_LAB_SEGURO = -1.0  
 
     # Transporte
     if respuesta.transporte.lower() == "bus":
