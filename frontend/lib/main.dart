@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'resultados_screen.dart';
 import 'donaciones_screen.dart';
 
-const String backendUrl = 'http://localhost:8000/encuesta';
+const String backendUrl = 'http://127.0.0.1:8000/encuesta';
 
 void main() => runApp(const HuellaCarbonoApp());
 
