@@ -48,6 +48,12 @@ class SurveyResponse(BaseModel):
     comidas_fuera_semana: int
     voluntariado_ambiental: bool
 
+
+@app.get("/")
+def read_root():
+    return {"mensaje": "API de Huella de Carbono Estudiantes", "status": "activo", "endpoints": ["/encuesta", "/docs"]}
+
+
 @app.post("/encuesta")
 def send_survey(respuesta: SurveyResponse):
     # Guardar los datos recibidos en resultados.txt
@@ -146,3 +152,7 @@ def send_survey(respuesta: SurveyResponse):
         "emisiones_estimadas_kgCO2": round(total, 2),
         "data": respuesta
     }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
