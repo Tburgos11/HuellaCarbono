@@ -167,7 +167,13 @@ def send_survey(respuesta: SurveyResponse):
         + ahorro_reciclaje
     )
 
-    # Generar recomendaciones personalizadas
+    # Mostrar resultado en consola para back end 
+    print(f"\n=== RESULTADO DEL CÁLCULO ===")
+    print(f"Estudiante: {respuesta.nombre}")
+    print(f"Carrera: {respuesta.carrera}")
+    print(f"Emisiones estimadas: {round(total, 2)} kg CO2")
+    print(f"===============================")
+    
     recomendaciones = []
     
     # Recomendaciones basadas en transporte
@@ -205,6 +211,12 @@ def send_survey(respuesta: SurveyResponse):
     
     # Limitar a 3 recomendaciones
     recomendaciones = recomendaciones[:3]
+    
+    # Mostrar recomendaciones en consola
+    print(f"\n=== RECOMENDACIONES ===")
+    for i, recomendacion in enumerate(recomendaciones, 1):
+        print(f"{i}. {recomendacion}")
+    print(f"=======================\n")
     
     return {
         "mensaje": "Respuesta recibida",

@@ -20,30 +20,34 @@ class DonacionesScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
+              child: ListView(
                 children: [
                   _buildFoundationCard(
                     'EcoVerde Ecuador',
                     'Organización dedicada a la reforestación de bosques nativos y la protección de especies en peligro de extinción.',
                     Colors.green,
+                    context,
                   ),
+                  const SizedBox(height: 16),
                   _buildFoundationCard(
                     'Mares Limpios',
                     'Fundación enfocada en la limpieza de océanos y la reducción de plásticos en ecosistemas marinos.',
                     Colors.blue,
+                    context,
                   ),
+                  const SizedBox(height: 16),
                   _buildFoundationCard(
                     'Energía Sostenible',
                     'Promueve el uso de energías renovables en comunidades rurales y proyectos de eficiencia energética.',
                     Colors.orange,
+                    context,
                   ),
+                  const SizedBox(height: 16),
                   _buildFoundationCard(
                     'Carbono Neutral',
                     'Especializada en proyectos de captura de carbono y compensación de emisiones mediante tecnologías verdes.',
                     Colors.teal,
+                    context,
                   ),
                 ],
               ),
@@ -61,53 +65,63 @@ class DonacionesScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildFoundationCard(String name, String description, Color color) {
+  Widget _buildFoundationCard(String name, String description, Color color, BuildContext context) {
     return Card(
       elevation: 4,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
           children: [
+            // Icono circular con color de la fundación
             Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(8.0),
+              width: 60,
+              height: 60,
               decoration: BoxDecoration(
                 color: color.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(8),
+                shape: BoxShape.circle,
               ),
-              child: Text(
-                name,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: color.withOpacity(0.8),
-                ),
-                textAlign: TextAlign.center,
+              child: Icon(
+                Icons.eco,
+                color: color,
+                size: 30,
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(width: 16),
+            // Contenido expandible
             Expanded(
-              child: Text(
-                description,
-                style: const TextStyle(fontSize: 12),
-                textAlign: TextAlign.justify,
-              ),
-            ),
-            const SizedBox(height: 8),
-            SizedBox(
-              width: double.infinity,
-              child: Builder(
-                builder: (context) => ElevatedButton(
-                  onPressed: () {
-                    _showDonationDialog(context, name, color);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: color,
-                    foregroundColor: Colors.white,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: color,
+                    ),
                   ),
-                  child: const Text('¡Quiero donar!'),
-                ),
+                  const SizedBox(height: 8),
+                  Text(
+                    description,
+                    style: const TextStyle(fontSize: 14),
+                    textAlign: TextAlign.justify,
+                  ),
+                  const SizedBox(height: 12),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _showDonationDialog(context, name, color);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: color,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                      ),
+                      child: const Text('¡Quiero donar!'),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
