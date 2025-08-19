@@ -118,3 +118,63 @@ usa_botella: False
 evita_imprimir: False
 comidas_fuera_semana: 2
 voluntariado_ambiental: False
+
+--- Nueva respuesta ---
+nombre: C
+carrera: c
+semestre: 4
+edad: 24
+transporte: Automóvil
+distancia_diaria_km: 4.0
+dias_asistencia: 4
+comparte_transporte: True
+horas_laboratorio: 4.0
+tipo_laboratorio: Cómputo
+usa_equipos_alto_consumo: False
+equipos_usados: 
+horas_pc_dia: 4.0
+dispositivo_principal: Laptop
+consumo_electricidad_extra: False
+tipo_consumo: 
+tipo_proyectos: s
+materiales_usados: s
+residuos_por_proyecto_kg: 1.0
+proyectos_por_semestre: 1
+clasifica_residuos: False
+porcentaje_reciclaje: Menos del 25%
+residuos_peligrosos: False
+laboratorio_gestiona_seguro: False
+usa_botella: False
+evita_imprimir: False
+comidas_fuera_semana: 3
+voluntariado_ambiental: False
+
+--- Nueva respuesta ---
+nombre: C
+carrera: c
+semestre: 4
+edad: 24
+transporte: Automóvil
+distancia_diaria_km: 4.0
+dias_asistencia: 4
+comparte_transporte: True
+horas_laboratorio: 4.0
+tipo_laboratorio: Cómputo
+usa_equipos_alto_consumo: False
+equipos_usados: 
+horas_pc_dia: 4.0
+dispositivo_principal: Laptop
+consumo_electricidad_extra: False
+tipo_consumo: 
+tipo_proyectos: s
+materiales_usados: s
+residuos_por_proyecto_kg: 1.0
+proyectos_por_semestre: 1
+clasifica_residuos: False
+porcentaje_reciclaje: Menos del 25%
+residuos_peligrosos: False
+laboratorio_gestiona_seguro: False
+usa_botella: False
+evita_imprimir: True
+comidas_fuera_semana: 3
+voluntariado_ambiental: True

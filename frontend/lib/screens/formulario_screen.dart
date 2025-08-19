@@ -61,7 +61,6 @@ class _FormularioScreenState extends State<FormularioScreen> {
   void initState() {
     super.initState();
     _inicializarValidaciones();
-    _inicializarPages();
   }
 
   void _inicializarValidaciones() {
@@ -409,6 +408,7 @@ class _FormularioScreenState extends State<FormularioScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _inicializarPages(); // Actualizar páginas en cada build
     return Scaffold(
       appBar: AppBar(title: const Text('Huella de Carbono Estudiantes'), backgroundColor: Colors.green),
       body: Row(
