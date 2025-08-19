@@ -167,9 +167,49 @@ def send_survey(respuesta: SurveyResponse):
         + ahorro_reciclaje
     )
 
+    # Generar recomendaciones personalizadas
+    recomendaciones = []
+    
+    # Recomendaciones basadas en transporte
+    if emisiones_transporte > 20 and not respuesta.comparte_transporte:
+        recomendaciones.append("Considera compartir transporte o usar transporte público para reducir tu huella de carbono.")
+    elif emisiones_transporte > 15 and respuesta.transporte.lower() == "automóvil":
+        recomendaciones.append("Intenta usar bicicleta o caminar para distancias cortas, o considera el transporte público.")
+    
+    # Recomendaciones sobre consumo de energía
+    if emisiones_pc > 5:
+        recomendaciones.append("Reduce el tiempo frente al computador o activa el modo de ahorro de energía para disminuir tu consumo.")
+    elif respuesta.consumo_electricidad_extra:
+        recomendaciones.append("Desconecta dispositivos electrónicos cuando no los uses para reducir el consumo extra de electricidad.")
+    
+    # Recomendaciones sobre residuos y reciclaje
+    if not respuesta.clasifica_residuos or respuesta.porcentaje_reciclaje == "Nada":
+        recomendaciones.append("Implementa la separación de residuos y aumenta tu porcentaje de reciclaje para reducir tu impacto ambiental.")
+    elif emisiones_residuos > 10:
+        recomendaciones.append("Busca maneras de reutilizar materiales en tus proyectos universitarios para generar menos residuos.")
+    
+    # Recomendaciones sobre hábitos
+    if not respuesta.usa_botella:
+        recomendaciones.append("Usa una botella reutilizable en lugar de botellas desechables para reducir residuos plásticos.")
+    elif not respuesta.evita_imprimir:
+        recomendaciones.append("Intenta trabajar digitalmente y evita imprimir documentos innecesariamente.")
+    elif emisiones_comida > 20:
+        recomendaciones.append("Considera preparar más comidas en casa y reduce las comidas fuera para disminuir tu huella de carbono.")
+    
+    # Recomendaciones generales basadas en el total
+    if total > 50:
+        if "Considera compartir transporte" not in str(recomendaciones):
+            recomendaciones.append("Tu huella de carbono es alta. Enfócate en reducir el transporte y el consumo energético.")
+    elif total < 10:
+        recomendaciones.append("¡Excelente! Tienes una huella de carbono baja. Considera hacer voluntariado ambiental para ayudar a otros.")
+    
+    # Limitar a 3 recomendaciones
+    recomendaciones = recomendaciones[:3]
+    
     return {
         "mensaje": "Respuesta recibida",
         "emisiones_estimadas_kgCO2": round(total, 2),
+        "recomendaciones": recomendaciones,
         "data": respuesta
     }
 

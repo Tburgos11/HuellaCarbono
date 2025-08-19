@@ -371,9 +371,13 @@ class _FormularioScreenState extends State<FormularioScreen> {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         final resultado = data["emisiones_estimadas_kgCO2"].toString();
+        final recomendaciones = List<String>.from(data["recomendaciones"] ?? []);
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => ResultadosScreen(resultado: resultado)),
+          MaterialPageRoute(builder: (_) => ResultadosScreen(
+            resultado: resultado,
+            recomendaciones: recomendaciones,
+          )),
         ).then((_) => Navigator.push(
           context,
           MaterialPageRoute(builder: (_) => const DonacionesScreen()),

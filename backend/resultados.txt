@@ -178,3 +178,33 @@ usa_botella: False
 evita_imprimir: True
 comidas_fuera_semana: 3
 voluntariado_ambiental: True
+
+--- Nueva respuesta ---
+nombre: Ce
+carrera: c
+semestre: 3
+edad: 22
+transporte: Automóvil
+distancia_diaria_km: 6.0
+dias_asistencia: 4
+comparte_transporte: True
+horas_laboratorio: 8.0
+tipo_laboratorio: Cómputo
+usa_equipos_alto_consumo: False
+equipos_usados: 
+horas_pc_dia: 10.0
+dispositivo_principal: Laptop
+consumo_electricidad_extra: True
+tipo_consumo: Aire
+tipo_proyectos: Software
+materiales_usados: electronicos
+residuos_por_proyecto_kg: 2.0
+proyectos_por_semestre: 2
+clasifica_residuos: True
+porcentaje_reciclaje: 25 – 50%
+residuos_peligrosos: False
+laboratorio_gestiona_seguro: False
+usa_botella: True
+evita_imprimir: False
+comidas_fuera_semana: 3
+voluntariado_ambiental: False
