@@ -88,3 +88,33 @@ usa_botella: True
 evita_imprimir: True
 comidas_fuera_semana: 2
 voluntariado_ambiental: False
+
+--- Nueva respuesta ---
+nombre: t
+carrera: t
+semestre: 3
+edad: 34
+transporte: Bus
+distancia_diaria_km: 2.0
+dias_asistencia: 2
+comparte_transporte: False
+horas_laboratorio: 2.0
+tipo_laboratorio: Cómputo
+usa_equipos_alto_consumo: False
+equipos_usados: 
+horas_pc_dia: 2.0
+dispositivo_principal: Laptop
+consumo_electricidad_extra: False
+tipo_consumo: 
+tipo_proyectos: 2
+materiales_usados: 2
+residuos_por_proyecto_kg: 2.0
+proyectos_por_semestre: 2
+clasifica_residuos: False
+porcentaje_reciclaje: Nada
+residuos_peligrosos: False
+laboratorio_gestiona_seguro: False
+usa_botella: False
+evita_imprimir: False
+comidas_fuera_semana: 2
+voluntariado_ambiental: False

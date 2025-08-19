@@ -331,7 +331,7 @@ class _FormularioScreenState extends State<FormularioScreen> {
 
   void _validarYEnviar() async {
     setState(() => cargando = true);
-    final body = {
+  final body = {
       "nombre": nombreController.text,
       "carrera": carreraController.text,
       "semestre": int.tryParse(semestreController.text) ?? 1,
@@ -339,26 +339,70 @@ class _FormularioScreenState extends State<FormularioScreen> {
       "transporte": transporte,
       "distancia_diaria_km": double.tryParse(distanciaController.text) ?? 0,
       "dias_asistencia": int.tryParse(diasController.text) ?? 1,
+      "comparte_transporte": comparteTransporte,
+      "horas_laboratorio": double.tryParse(horasLaboratorioController.text) ?? 0,
+      "tipo_laboratorio": tipoLaboratorio,
+      "usa_equipos_alto_consumo": usaEquiposAltoConsumo,
+  "equipos_usados": usaEquiposAltoConsumo ? equiposUsadosController.text : "",
+      "horas_pc_dia": double.tryParse(horasPcController.text) ?? 0,
+      "dispositivo_principal": dispositivoPrincipal,
+      "consumo_electricidad_extra": consumoElectricidadExtra,
+  "tipo_consumo": consumoElectricidadExtra ? tipoConsumoController.text : "",
+      "tipo_proyectos": tipoProyectosController.text,
+      "materiales_usados": materialesUsadosController.text,
+      "residuos_por_proyecto_kg": double.tryParse(residuosPorProyectoController.text) ?? 0,
+      "proyectos_por_semestre": int.tryParse(proyectosPorSemestreController.text) ?? 1,
+      "clasifica_residuos": clasificaResiduos,
+      "porcentaje_reciclaje": porcentajeReciclaje,
+      "residuos_peligrosos": residuosPeligrosos,
+  "laboratorio_gestiona_seguro": residuosPeligrosos ? laboratorioGestionaSeguro : false,
+      "usa_botella": usaBotella,
+      "evita_imprimir": evitaImprimir,
+      "comidas_fuera_semana": int.tryParse(comidasFueraController.text) ?? 0,
+      "voluntariado_ambiental": voluntariadoAmbiental,
     };
+    print('JSON enviado al backend: ' + json.encode(body));
     try {
-      final response = await http.post(Uri.parse(backendUrl), headers: {'Content-Type': 'application/json'}, body: json.encode(body));
+      final response = await http.post(
+        Uri.parse(backendUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(body),
+      );
       setState(() => cargando = false);
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         final resultado = data["emisiones_estimadas_kgCO2"].toString();
-        Navigator.push(context, MaterialPageRoute(builder: (_) => ResultadosScreen(resultado: resultado)))
-            .then((_) => Navigator.push(context, MaterialPageRoute(builder: (_) => const DonacionesScreen())));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => ResultadosScreen(resultado: resultado)),
+        ).then((_) => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const DonacionesScreen()),
+        ));
       } else {
+        String errorMsg = 'Error al enviar formulario. Intente nuevamente.';
+        try {
+          final errorData = json.decode(response.body);
+          if (errorData is Map && errorData.containsKey('detail')) {
+            errorMsg = errorData['detail'].toString();
+          }
+        } catch (_) {}
         showDialog(
           context: context,
-          builder: (_) => AlertDialog(title: const Text('Error'), content: const Text('Error al enviar formulario. Intente nuevamente.')),
+          builder: (_) => AlertDialog(
+            title: const Text('Error'),
+            content: Text(errorMsg),
+          ),
         );
       }
     } catch (_) {
       setState(() => cargando = false);
       showDialog(
         context: context,
-        builder: (_) => AlertDialog(title: const Text('Error de conexión'), content: const Text('No se pudo conectar al servidor.')),
+        builder: (_) => AlertDialog(
+          title: const Text('Error de conexión'),
+          content: const Text('No se pudo conectar al servidor.'),
+        ),
       );
     }
   }

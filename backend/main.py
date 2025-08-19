@@ -73,6 +73,9 @@ def save_donation(donacion: DonationRequest):
 
 @app.post("/encuesta")
 def send_survey(respuesta: SurveyResponse):
+    import sys
+    print("Datos recibidos en /encuesta:", file=sys.stderr)
+    print(respuesta, file=sys.stderr)
     # Guardar los datos recibidos en resultados.txt
     with open("resultados.txt", "a", encoding="utf-8") as f:
         f.write("\n--- Nueva respuesta ---\n")
